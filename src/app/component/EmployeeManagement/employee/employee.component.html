@@ -1,0 +1,473 @@
+<h4 class="mat-h3"><i class="fa fa-users mr-1" aria-hidden="true"> </i> Employee</h4>
+<mat-divider>
+    <mat-error *ngIf="error!=null">
+        <h5 class="m-1">{{error}} </h5>
+      </mat-error>
+</mat-divider>
+  <mat-card class="rounded shadow m-3">
+    <mat-card-header class="d-flex flex-row">
+       <mat-card-title>Employee Information</mat-card-title> 
+       
+        <div class="header">
+          <div class="header-button">
+          <button  class="ml-2" type="submit"    (click)="saveAllData()" mat-raised-button color="primary" ><i class="fa fa-save  text-white  "></i> Save All</button>
+          <button class="ml-2"  [disabled]="employeeId.value==''||employeeId.value==null ? true : false"  mat-raised-button color="warn" ><i class="fa fa-trash-o text-white" aria-hidden="true"></i> Delete</button>
+          <button class="ml-2" (click)=" refresh_Control()"  mat-raised-button color="basic" ><i class="fas fa-broom    text-white"></i> clear</button>
+        
+          </div>
+          
+   
+        <div *ngIf="status!=null" class="header-status" >
+        <ng-container *ngIf="status; else elseTemplate">
+           <p class="text-success">Active</p>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <p class="text-danger">In Active</p>
+          
+        </ng-template>
+        
+        </div>
+          
+    </div>
+    </mat-card-header>
+  
+   
+   
+    
+
+    <mat-card-content>
+     
+      
+      <!-- ==================== -->
+      <!-- mat group start here -->
+      <!-- ==================== -->
+      <mat-tab-group>
+        <!-- =================== -->
+        <!-- Personal Information -->
+        <!-- =================== -->
+        <div *ngIf="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="fa fa-user" aria-hidden="true "> </i>
+            Personal Info 
+          </ng-template>
+          <div class="d-flex">
+       <div class="col-8">
+          <form  class=" m-1" (ngSubmit)="saveAllData()"  [formGroup]="PersonalForm">
+            <div class="row justify-content-start">
+
+              <input formControlName="id"  type="hidden">
+              
+              <mat-form-field>
+                <input matInput formControlName="employeeId" placeholder="Employee Id" type="text">
+                <mat-error>
+                 <div *ngIf="employeeId.invalid && (employeeId.dirty || employeeId.touched)"
+                class="text-danger">
+
+                <div *ngIf="employeeId.errors.required">
+                  Employee ID is required.
+                </div>
+                      
+              </div>
+              </mat-error>                
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput formControlName="fullName" placeholder="Full name" type="text">
+                <mat-error>
+                  <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)"
+                 class="text-danger">
+ 
+                 <div *ngIf="fullName.errors.required">
+                   Full Name is required.
+                 </div>
+                 <div *ngIf="fullName.errors.minlength">
+                   Full Name must be at least 4 characters long.
+                 </div>
+             
+                  <div *ngIf="fullName.errors.maxLength">
+                      Full Name must be at less than 30 characters long.
+                    </div>
+               </div>
+               </mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field>
+                <input matInput formControlName="age" placeholder="Age" type="number">
+                <mat-error>
+                    <div *ngIf="age.invalid && (age.dirty || age.touched)"
+                   class="text-danger">
+   
+                   <div *ngIf="age.errors.required">
+                     Age is required.
+                   </div>
+                   <div *ngIf="age.errors.min">
+                     Employee age must be older than 18 year.
+                   </div>
+                   <div *ngIf="age.errors.max">
+                     Employee age should be more than 80 year.
+                    </div>
+               
+                 </div>
+                 </mat-error>
+              </mat-form-field>
+               
+            </div>
+          
+            <div class="row">
+
+              <mat-form-field>
+                 <input matInput formControlName="sex" placeholder="Gender">
+                  <mat-error>
+                    <div *ngIf="sex.invalid && (sex.dirty || sex.touched)"
+                   class="text-danger">
+   
+                   <div *ngIf="sex.errors.required">
+                     Gender is required.
+                   </div>
+                
+                   </div>
+                 </mat-error>
+                </mat-form-field>
+
+              <mat-form-field>
+                <input matInput formControlName="phone" placeholder="phone number" type="tel">
+                <mat-error>
+                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                   class="text-danger">
+   
+                   <div *ngIf="phone.errors.minlength">
+                      Phone must be at least 9 number long.
+                    </div>
+                   <div *ngIf="phone.errors.maxlength">
+                     Phone must be at less than 16 number long.
+                   </div>
+                 </div>
+                 </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput formControlName="email" placeholder="Email" type="email">
+                <mat-error>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                   class="text-danger">
+   
+                   <div *ngIf="email.errors.email">
+                     Email is format is invalid.
+                   </div>
+                  
+                 </div>
+                 </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput formControlName="address" placeholder="Address" type="text">
+              
+              </mat-form-field>
+
+              <mat-form-field>
+                  <input matInput formControlName="birthDate" [matDatepicker]="picker" placeholder="Birth date">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                 
+                </mat-form-field>
+            </div>
+            
+          </form>
+            </div>
+            <div class="col-3">
+              <div class="row shadow avatar-img ">
+                 <input type="file" hidden  (change)="OnFileSelected($event)"  #fileInput >
+                   <ng-container *ngIf="imageUrl==null; else elseTemplate">
+                  <img class="avatar" ngif [src]='avatar'  alt="avatar">
+                     
+                   </ng-container>
+                   <ng-template #elseTemplate>
+                  <img  class="avatar" [src]="domSanitizer.bypassSecurityTrustUrl(imageUrl)"   alt="avatar">
+                     
+                   </ng-template>
+                   
+
+              </div> 
+              <div class="row m-auto">
+                <button mat-raised-button (click)="fileInput.click()" color="basic"><i class="fa fa-upload" aria-hidden="true"> </i>Change Profile</button>
+              </div>
+            </div>
+          </div>
+         </mat-tab> 
+
+         <!-- ==================================== -->
+          <!-- Education -->
+          <!-- ====================== -->
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+           <i class="fa fa-university" aria-hidden="true"></i>
+            Education
+          </ng-template>
+          <form  class=" m-2 "  [formGroup]="EduForm">
+              <div class="row">
+
+                  <input type="hidden" formControlName="id" value="">
+                
+                  <mat-form-field>
+                  <input matInput formControlName="eduactionLevel" placeholder="Education Level" type="text">
+                  <mat-error>
+                      <div *ngIf="eduactionLevel.invalid && (eduactionLevel.dirty || eduactionLevel.touched)"
+                     class="text-danger">
+     
+                     <div *ngIf="eduactionLevel.errors.required">
+                       Education level is required.
+                     </div>
+                  
+                     </div>
+                   </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput formControlName="instituation" placeholder="Instituation">
+                    <mat-error>
+                        <div *ngIf="instituation.invalid && (instituation.dirty || instituation.touched)"
+                       class="text-danger">
+       
+                       <div *ngIf="instituation.errors.required">
+                         Instituation is required.
+                       </div>
+                    
+                       </div>
+                     </mat-error>
+                  </mat-form-field>
+
+                <mat-form-field>
+                  <input matInput formControlName="courseOfeducation" placeholder="Field of study" type="text">
+                  <mat-error>
+                      <div *ngIf="courseOfeducation.invalid && (courseOfeducation.dirty || courseOfeducation.touched)"
+                     class=" text-danger">
+     
+                     <div *ngIf="courseOfeducation.errors.required">
+                       Field of study is required.
+                     </div>
+                  
+                     </div>
+                   </mat-error>
+                </mat-form-field>
+               
+              
+            
+                  </div>
+                  <div class="row">
+
+                      <mat-form-field>
+                          <input matInput formControlName="graduatedYear" placeholder="Graduated year" type="number">
+                          <mat-error>
+                              <div *ngIf="graduatedYear.invalid && (graduatedYear.dirty || graduatedYear.touched)"
+                             class="text-danger">
+             
+                             <div *ngIf="graduatedYear.errors.required">
+                               Graduated year is required.
+                             </div>
+                          
+                             </div>
+                           </mat-error>
+                        </mat-form-field>
+
+                    <mat-form-field>
+                      <input matInput formControlName="_GBA" placeholder="Grade">
+                      <mat-error>
+                          <div *ngIf="_GBA.invalid && (_GBA.dirty || _GBA.touched)"
+                         class="text-danger">
+         
+                         <div *ngIf="_GBA.errors.required">
+                           Grade is required.
+                         </div>
+                      
+                         </div>
+                       </mat-error>
+                    </mat-form-field>
+                   
+                 <div class="mt-2">
+                    <button type="button" [disabled]="EduForm.invalid" (click)="addEducation()" class="pl-3 pr-3 m-auto" mat-raised-button color="primary">
+                       <i class="fa fa-plus text-white" aria-hidden="true text-white"> </i> add</button>
+                  </div>
+                  </div>
+                  </form>
+                <!-- ====================== -->
+                <!-- Education table -->
+                <!-- ====================== -->
+                  <mat-table class="table-education" [dataSource]="EducationData"  aria-label="Elements">
+
+                    <ng-container matColumnDef="instituation">
+                      <mat-header-cell *matHeaderCellDef> Instituation   </mat-header-cell>
+                      <mat-cell *matCellDef="let row"> {{row.instituation}} </mat-cell>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="eduactionLevel">
+                      <mat-header-cell *matHeaderCellDef>Education Level</mat-header-cell>
+                      <mat-cell *matCellDef="let row"> {{row.eduactionLevel}} </mat-cell>
+                    </ng-container>
+                    
+
+                    <ng-container matColumnDef="_GBA">
+                      <mat-header-cell *matHeaderCellDef> Grade</mat-header-cell>
+                      <mat-cell *matCellDef="let row"> {{row._GBA}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Action">
+                        <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> <button mat-button color="primary" (click)="setEduValue(row)" >Edit</button>
+                         <button mat-button color="warn">delete</button> </mat-cell>
+                      </ng-container>
+                         
+                    <mat-header-row *matHeaderRowDef="displayedColumnsEducation; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumnsEducation;"></mat-row>
+                  </mat-table>
+                 
+        </mat-tab>
+
+        <!-- ========================== -->
+        <!-- Exprience -->
+        <!-- ========================== -->
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="fa fa-suitcase" aria-hidden="true"> </i>
+            Work Exprience 
+          </ng-template>
+          <form  class=" m-2 "  [formGroup]="ExpForm">
+              <div class="row">
+                
+                <input type="hidden" formControlName="id" value="">
+
+                <mat-form-field>
+                  <input matInput formControlName="jobPosition" placeholder="Position" type="text">
+                  <mat-error>
+                      <div *ngIf="jobPosition.invalid && (jobPosition.dirty || jobPosition.touched)"
+                     class="text-danger">
+     
+                     <div *ngIf="jobPosition.errors.required">
+                       Position is required.
+                     </div>
+                  
+                     </div>
+                   </mat-error>
+                </mat-form-field>
+  
+                <mat-form-field>
+                  <input matInput formControlName="companyName" placeholder="company name" type="text">
+                  <mat-error>
+                      <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)"
+                     class="text-danger">
+     
+                     <div *ngIf="companyName.errors.required">
+                       Company is required.
+                     </div>
+                  
+                     </div>
+                   </mat-error>
+                </mat-form-field>
+
+                
+                <mat-form-field>
+                  <input matInput formControlName="rangeTime" placeholder="Range year " type="number">
+                  <mat-error>
+                      <div *ngIf="rangeTime.invalid && (rangeTime.dirty || rangeTime.touched)"
+                     class="text-danger">
+     
+                     <div *ngIf="rangeTime.errors.required">
+                       Range is required.
+                     </div>
+                     <div *ngIf="rangeTime.errors.min">
+                        Range should be more than 0 year.
+                      </div>
+                      <div *ngIf="rangeTime.errors.max">
+                        Range should be less than 40 year.
+                        </div>
+                     </div>
+                   </mat-error>
+                </mat-form-field>
+                 </div>
+              <div class="row">
+                <mat-form-field>
+                  
+                  <input matInput formControlName="fromDate" [matDatepicker]="frompicker" placeholder="Started date"> 
+                  <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                  <mat-datepicker #frompicker></mat-datepicker>
+                  <mat-error>
+                      <div *ngIf="fromDate.invalid && (fromDate.dirty || fromDate.touched)"
+                     class="text-danger">
+     
+                     <div *ngIf="fromDate.errors.required">
+                        From date is required.
+                     </div>
+                    
+                     </div>
+                   </mat-error>
+                </mat-form-field>
+                
+                 <mat-form-field>
+                    <input matInput formControlName="toDate"  [matDatepicker]="topicker" placeholder="End date">
+                   <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                    <mat-datepicker #topicker></mat-datepicker>
+                    <mat-error>
+                        <div *ngIf="toDate.invalid && (toDate.dirty || toDate.touched)"
+                       class="text-danger">
+       
+                       <div *ngIf="toDate.errors.required">
+                          To date is required.
+                       </div>
+                      
+                       </div>
+                     </mat-error>
+                  </mat-form-field>
+
+                 <div class="mt-1">
+                    <button (click)="addExprience()" [disabled]="ExpForm.invalid" class="pl-3 pr-3 m-auto" mat-raised-button color="primary">
+                        <i class="fa fa-plus text-white" aria-hidden="true"></i> add</button>
+                  </div>
+                
+              </div>
+              
+            </form>
+            <!--================================  -->
+            <!-- Exprience table-->
+            <!-- ============================== -->
+            
+            <mat-table class="table-exprience" [dataSource]="ExprienceData"  aria-label="Elements">
+
+                <ng-container matColumnDef="jobPosition">
+                  <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.jobPosition}} </mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="companyName">
+                  <mat-header-cell *matHeaderCellDef> Company</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.companyName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="rangeTime">
+                    <mat-header-cell *matHeaderCellDef> Range time  </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.rangeTime}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="fromDate">
+                  <mat-header-cell *matHeaderCellDef>started date </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.fromDate}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="toDate">
+                    <mat-header-cell *matHeaderCellDef> Ending date </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.toDate}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Action">
+                      <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+                      <mat-cell *matCellDef="let row"> <button mat-button color="primary" (click)="setExValue(row)">edit</button>
+                       <button mat-button color="warn">delete</button> </mat-cell>
+                    </ng-container>
+                   
+                <mat-header-row *matHeaderRowDef="displayedColumnsExprience; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumnsExprience;"></mat-row>
+              </mat-table>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+ </mat-card>
+  

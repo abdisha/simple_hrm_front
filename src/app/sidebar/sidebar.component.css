@@ -1,0 +1,144 @@
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 220px;
+    background: #222f3e;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.sidenav .mat-list-item { 
+  color:#d2dae2;
+  font-family: 'Segoe UI';
+  font-size: 15px;
+  font-weight: 350;
+
+}
+.sidenav .mat-list-item:hover { 
+  color:#1dd1a1;
+  font-family: 'Segoe UI';
+  font-size: 15px; 
+  font-weight: 420;
+  
+}
+.sidenav .mat-list-item a .active { 
+  color:#1dd1a1;
+  font-family: 'Segoe UI';
+  font-size: 14px; 
+  font-weight: 200;
+  
+}
+
+ul li { 
+  color:#d2dae2;
+  font-family: 'Segoe UI';
+  font-weight: 460;
+  font-size: 13px;
+  cursor: pointer; 
+  margin-top: 2px;
+  margin-left: -5px;
+}
+
+
+
+ ul{
+list-style: none;
+}
+.sidenav .mat-toolbar {
+  background:#576574;
+  color: rgba(240, 248, 255, 0.829);
+  height: 100px;
+ margin-bottom:10px ;
+ border-bottom: 7px;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.sidenav-container{
+  background-color: #DADADA;
+}
+.rounded-circle{
+   background: #01a3a4;
+   font-size: 13px;
+  margin-top: 9px;
+  font-family: 'Segoe UI';
+  padding: 17px;
+  align-self: flex-start;
+  color: white;
+}
+
+
+.desc{
+     position: absolute; 
+     margin-top: 40px;
+}
+ .desc p{
+  margin-top: 19px;
+  font-family: sans-serif; 
+  font-size:12px;
+  align-self: flex-start;
+  color: rgb(229, 230, 231);
+}
+.main-toolbar{
+  position: relative;
+  display: inline-flex;
+  height: 8vh;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.left-content{
+   width: 150px;
+   height: 100%;
+}
+.left-content span{
+  position: absolute;
+   margin-top: 17px;
+   font-weight: 600;
+   margin-left: 10px;
+}
+.profile{ 
+  cursor: pointer;
+  position: absolute;
+  right: 52px;
+  top: 17px;
+  height:23px;
+  width: fit-content;
+  display: inline-flex;
+}
+.search{
+  width: 600px;
+  right: 230px;
+  top: 40px;
+  position: relative;
+  margin: auto;
+}
+.search input[type=text] {
+  
+  background: url("../../assets/icons8_Search_24px_3.png");
+  clear: both;
+  background-color: rgb(247, 247, 247);
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  width: 100%;
+  height: 40px;
+  margin: 8px 0;
+  color: #222f3e;
+  font-size: medium;
+  border-radius: 13px;
+  box-sizing: border-box;
+}
+.avatar-searching{
+  max-width: 35px;
+  max-height: 35px;
+   margin: 8px;
+  border-radius: 50%;
+  font-size: xx-small;
+}
+.dropdown-item:hover{
+color: #576574;
+}

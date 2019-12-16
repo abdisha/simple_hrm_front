@@ -1,0 +1,189 @@
+<h4 class="mat-h3"><i class="fa fa-users mr-1" aria-hidden="true"> </i> Employee</h4>
+<mat-divider>
+</mat-divider>
+<mat-card class="rounded shadow m-3">
+        <mat-card-header>
+          <ng-container *ngIf="imageUrl==null; else elseTemplate">
+              <div mat-card-avatar><img src="../../../../assets/avatar.svg" width="20px" height="20px" class="rounded-circle" alt=""></div>
+          </ng-container>
+          <ng-template #elseTemplate>
+              <div mat-card-avatar><img [src]="domSanitizer.bypassSecurityTrustUrl(imageUrl)" width="20px" height="20px" class="rounded-circle" alt=""></div>
+          </ng-template>
+          
+            <mat-card-title >Reinstate</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+              <!-- Personal Information -->
+            <!-- =================== -->
+           
+                    <ng-template mat-tab-label>
+                      <i class="fa fa-user" aria-hidden="true "> </i>
+                      Personal Info 
+                    </ng-template>
+                   <div class="justify-content-center">
+                    <form  class=" m-1"  [formGroup]="PersonalForm">
+                      <div class="row justify-content-start">
+          
+                        <input formControlName="id"  type="hidden">
+                        
+                        <mat-form-field class="col-3 m-1">
+                          <input matInput formControlName="employeeId" placeholder="Employee Id" type="text" readonly>              
+                        </mat-form-field>
+          
+                        <mat-form-field class="col-3 m-1">
+                          <input matInput formControlName="fullName" placeholder="Full name" type="text" readonly>
+                  
+                        </mat-form-field>
+          
+          
+                        <mat-form-field class="col-3 m-1">
+                          <input matInput formControlName="age" placeholder="Age" type="number" readonly>
+                        
+                        </mat-form-field>
+                         
+                      </div>
+                    
+                      <div class="row">
+          
+                        <mat-form-field class="col-3 m-1">
+                           <input matInput formControlName="sex" placeholder="Gender" readonly>
+                   
+                          </mat-form-field>
+          
+                        <mat-form-field class="col-3 m-1">
+                          <input matInput formControlName="phone" placeholder="phone number" type="tel" readonly>
+                          
+                        </mat-form-field>
+          
+                        <mat-form-field class="col-3 m-1">
+                          <input matInput formControlName="email" placeholder="Email" type="email" readonly>
+                          
+                        </mat-form-field>
+          
+                        <mat-form-field class="col-3 m-1">
+                          <input matInput formControlName="address" placeholder="Address" type="text" readonly>
+                        
+                        </mat-form-field>
+          
+                        <mat-form-field class="col-3 m-1">
+                            <input matInput formControlName="birthDate" [matDatepicker]="picker" placeholder="Birth date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                           
+                          </mat-form-field>
+                      </div>
+                      
+                    </form> 
+                    <H5>Discplinary Measure Taken</H5>
+                     <mat-divider class="col-9 ml-3">  
+                      
+                     </mat-divider>
+                      </div>
+                            
+                      {{error}}
+                      <form (ngSubmit)="saveReinstate()"  class=" m-3 " [formGroup]="DiscplinaryForm">
+                        <div class="row">
+                          <mat-form-field>
+                          <input matInput placeholder="Position" formControlName="position">
+                           <mat-error>
+                              <div *ngIf="position.invalid && (position.dirty || position.touched)"
+                              class="text-danger">
+              
+                              <div *ngIf="position.errors.required">
+                                  Position required.
+                              </div>
+                            
+                              </div>
+                           </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input matInput placeholder="Departement" formControlName="departement" >
+                          <mat-error>
+                              <div *ngIf="departement.invalid && (departement.dirty || departement.touched)"
+                              class="text-danger">
+              
+                              <div *ngIf="departement.errors.required">
+                                  Departement required.
+                              </div>
+                            
+                              </div>
+                          </mat-error>
+                        </mat-form-field>
+                        
+                        <mat-form-field>
+                          <input matInput type="text" placeholder="Type of employement" formControlName="typeOfEmployement" >
+                          <mat-error>
+                              <div *ngIf="typeOfEmployement.invalid && (typeOfEmployement.dirty || typeOfEmployement.touched)"
+                              class="text-danger">
+              
+                              <div *ngIf="typeOfEmployement.errors.required">
+                                 Type of employement required.
+                              </div>
+                            
+                              </div>
+                          </mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div class="row">
+                        <mat-form-field>
+                          <input matInput readonly formControlName="reinstateDate" [matDatepicker]="rienstatpicker" placeholder="Birth date">
+                          <mat-datepicker-toggle matSuffix [for]="rienstatpicker"></mat-datepicker-toggle>
+                          <mat-datepicker #rienstatpicker></mat-datepicker>
+                          <mat-error>
+                              <div *ngIf="reinstateDate.invalid && (reinstateDate.dirty || reinstateDate.touched)"
+                              class="text-danger">
+              
+                              <div *ngIf="reinstateDate.errors.pattern">
+                                Incorrect date format.
+                              </div>
+                            
+                              </div>
+                            </mat-error>
+                        </mat-form-field>
+                         
+                         
+                          <mat-form-field>
+                          <input matInput placeholder="Salary" type="number" formControlName="basicSalary" >
+                          <mat-error>
+                              <mat-error>
+                                  <div *ngIf="basicSalary.invalid && (basicSalary.dirty || basicSalary.touched)"
+                                  class="text-danger">
+                  
+                                  <div *ngIf="basicSalary.errors.max">
+                                    basic salary is should not exceed 10000 ETB.
+                                  </div>
+                                
+                                  </div>
+                                </mat-error>
+                          </mat-error>
+                        </mat-form-field>
+                        </div>
+                         <div class="row justify-content-center">
+                             <button mat-raised-button type="button" [disabled]="!DiscplinaryForm.valid" color="basic">
+                                <i class="fa fa-save    text-dark"></i> Save</button>
+
+                         </div>
+                      </form>
+
+                      <!-- <mat-table [dataSource]="dataSource">
+                          <ng-container matColumnDef="columnName">
+                              <mat-header-cell *matHeaderCellDef> columnHeaderLabel
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let element"> {{element.propertyName}} </mat-cell>
+                          </ng-container>
+                      
+                          <ng-container matColumnDef="columnName">
+                              <mat-header-cell *matHeaderCellDef> columnHeaderLabel</mat-header-cell>
+                              <mat-cell *matCellDef="let element"> {{element.propertyName}} </mat-cell>
+                          </ng-container>
+                          
+                          a-md-data-table-column
+                      
+                      
+                          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      </mat-table> -->
+        </mat-card-content>
+      </mat-card>
+    
+

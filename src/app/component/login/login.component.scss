@@ -1,0 +1,52 @@
+.login-container{
+    position: absolute;
+    width: 100%;
+    height: 60vh;
+    background-color: #405348;
+    
+}
+
+
+.title{
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+     
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+.mat-form-field{
+    width: 100%;
+}
+
+.mat-card-content{
+    margin: auto;
+    width: 70%;
+}
+.mat-card{
+    top: 45px;
+    height: 70vh;
+    width: 30%;
+}
+.mat-card-title{
+    color: #455f50;
+    margin-top: 10px;
+    text-align: center;
+    }
+    .mat-card-subtitle{
+        padding: 5px;
+        color: #405348;
+        font-size: medium;
+        overflow: auto;
+        border-style: solid;
+        border-color: #405348;
+    }
+.btn-reg{
+   padding-left: 70px;
+   padding-right: 70px;
+   margin: 30px;
+   border: round;
+}

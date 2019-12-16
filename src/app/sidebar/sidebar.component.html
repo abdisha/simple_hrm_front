@@ -1,0 +1,125 @@
+<mat-sidenav-container class="sidenav-container">
+   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+     
+    <mat-toolbar color="primary" class="mat-elevation-z6">
+      <div class="rounded-circle shadow">
+      SHM 
+      </div>
+
+      <div class="desc">
+        <p>Human Resources Management</p>
+      </div>
+
+    </mat-toolbar>
+   <mat-nav-list id="accordion">
+      <div class="menu">
+      <a mat-list-item (click)="getDashBoard()" class="collapsed" data-toggle="collapse" data-target="#collapse"> <i
+          class="fa fa-tachometer mr-1" aria-hidden="true"> </i>Dash board</a>
+      </div>
+     <div class="menu">
+      <a mat-list-item class="collapsed" data-toggle="collapse" data-target="#collapseEmp"><i class="fa fa-users mr-1"
+          aria-hidden="true"> </i>Employee Management</a>
+      <div class="collapse" data-parent="#accordion" id="collapseEmp">
+        <ul>
+          <li> <a (click)="getEmployee()"> <i class="fa fa-arrow-right mr-1"
+                aria-hidden="true"> </i> Employee</a>
+          </li>
+          <li><a (click)="getReinState()"> <i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i>Rienstate Employee</a></li>
+          <li><a (click)="getAssignPosition()"> <i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i> Assign Position</a></li>
+          <li><a (click)="getDisciplinaryMeasure()"> <i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i> Disciplinary Measure</a></li>
+          <li><a (click)="getChangeEmployementType()"> <i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i> Change Employement Type</a></li>
+          <li><a (click)="getSalaryIncrement()"> <i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i> Salary Increment</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+      <div class="menu">
+        <a mat-list-item class="collapsed" data-toggle="collapse" data-target="#collapseDep"><i class="fa fa-tree mr-1"
+            aria-hidden="true"> </i>Leave</a>
+        <div class="collapse" data-parent="#accordion" id="collapseDep">
+          <ul>
+            <li> <a href=""><i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i>Annual Leave </a></li>
+            <li> <a href=""><i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i>Annual Leave Calculation</a></li>
+            <li> <a href=""><i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i>Annual Leave Entry</a></li>
+          </ul>
+
+        </div>
+      </div>
+      <div class="menu">
+        <a mat-list-item class="collapsed" data-toggle="collapse" data-target="#collapseLev">
+          <i class="fa fa-cog" aria-hidden="true"> </i> Setting</a>
+        <div class="collapse" data-parent="#accordion" id="collapseLev">
+          <ul>
+            <li>
+              <a href=""><i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i> Departement</a></li>
+              <li>
+              <a href=""><i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i> Job Position</a></li>
+              <li>
+              <a href=""><i class="fa fa-arrow-right mr-1" aria-hidden="true"> </i> Leave Type</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    
+    <div class="main-toolbar "> 
+      <div class="left-content">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"> <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+    
+        <span class="text-black">Human-RM</span>
+        </div>
+      <div  *ngIf="includeEmployee" class="search">
+        <input type="text"  matInput [formControl]="employee"  class="shadow"    placeholder="Seach employee here..." [matAutocomplete]="auto">
+                
+        <mat-autocomplete  autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='getSelectedEmployee($event.option.value)' [displayWith]="displayFn" >
+              <mat-option aria-disabled="true">Profile    <span class="ml-2">Employee Id</span> <span class="ml-2"> FullName</span></mat-option>
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                 <ng-container *ngIf="option.profileImage==null; else elseTemplate">
+                 <img src="../../../../assets/avatar.svg"  class="mr-1 avatar-searching" alt="avatar"/>
+                   
+                 </ng-container>
+                 <ng-template #elseTemplate>
+                    <img [src]="domSanitizer.bypassSecurityTrustUrl(option.profileImage)"  class="mr-3 avatar-searching" alt="avatar"/>
+                   
+                 </ng-template>
+                 
+                 <span class="ml-2">{{option.employeeId}}</span> 
+                 <span class="ml-2"> {{option.fullName}}</span>
+              </mat-option>
+            </mat-autocomplete>
+         </div>
+        
+      <div class="profile dropdown open" id="triggerId" data-toggle="dropdown" >
+         <p class="user">{{username}}</p>
+         <i class="fa fa-user-o  mt-1 ml-2" aria-hidden="true"></i>
+         <i class="fa fa-caret-down mt-2 ml-1" aria-hidden="true"></i>
+     
+      
+      <div class="dropdown-menu rounded shadow" aria-labelledby="triggerId">
+          <a class="dropdown-item"  [routerLink]="[ '/login' ]"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+          <mat-divider></mat-divider>
+          <a class="dropdown-item" [routerLink]="[ '/login' ]"><i class="fa fa-sign-out" aria-hidden="true"> </i> Log Out</a>
+        </div>
+       </div>
+    </div>
+    <div class="container-fluid">
+      <router-outlet>
+      </router-outlet>
+    </div>
+       
+ 
+
+  
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

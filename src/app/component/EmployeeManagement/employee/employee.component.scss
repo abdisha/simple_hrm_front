@@ -1,0 +1,88 @@
+
+.mat-form-field {
+    margin: 10px;
+}.mat-radio-group .mat-radio-button {
+
+    margin: 10px;
+
+}
+.search-form-field {
+    width: 400px;
+    border-radius: 2px;
+  }
+
+  .search-form-field div.mat-form-field-underline{
+      display: none;
+  }
+  form{
+      width: fit-content;
+  }
+  .fa{
+      margin-right: 6px;
+      size: 40px;
+      color: rgb(24, 23, 23);
+  }
+  .mat-card{
+      height: 70vh;
+      
+  }
+  .table-education{
+    height: 30vh;
+    overflow: auto;
+  }
+  .table-exprience{
+    height: 30vh;
+    overflow: auto;
+  }
+  .searching-table {
+   
+    height: 50vh;
+    overflow: auto;
+  }
+  
+  .avatar {
+  max-width: 100%;
+  max-height: 140px;
+}
+.avatar-searching{
+  max-width: 45px;
+  max-height: 45px;
+  margin: 2px;
+  border-radius: 50%;
+}
+
+.avatar-img {
+  border-radius: 1px;
+  width: 130px;
+  min-height: 140px;
+  max-height: 140px;
+  overflow: hidden;
+  align-content: center;
+  margin: 7px;
+  padding: 3px;
+}
+ .header{
+   align-self: flex-end;
+  width: 70%;
+  display: inline-flex;
+  float: right;
+  justify-content: flex-end;
+}
+// .header{
+//   display: inline-flexbox;
+//   background-color: red;
+//   float: right;
+// }
+.header-button{
+  float: right;
+  align-self: flex-end;
+}
+.header-status p{
+  border-style: dotted;
+
+  border-color: black;
+  float: right;
+  padding: 2px;
+  margin-top: 2px;
+  align-content: flex-end;
+}
